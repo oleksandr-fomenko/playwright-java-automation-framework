@@ -61,8 +61,9 @@ public class PlaywrightManager {
     }
 
     private BrowserType.LaunchOptions getCommonLaunchOptions(){
+        boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"));
         return new BrowserType.LaunchOptions()
-                .setHeadless(false);
+                .setHeadless(isHeadless);
     }
 
 }
