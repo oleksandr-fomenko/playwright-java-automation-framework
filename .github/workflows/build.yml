@@ -18,7 +18,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-set headless
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 8
