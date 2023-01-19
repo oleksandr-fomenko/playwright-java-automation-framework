@@ -1,0 +1,6 @@
+<aspectj>
+    <aspects>
+        <aspect name="com.github.aspects.LoggableAspect"/>
+        <aspect name="com.github.aspects.PlaywrightAspect"/>
+    </aspects>
+</aspectj>

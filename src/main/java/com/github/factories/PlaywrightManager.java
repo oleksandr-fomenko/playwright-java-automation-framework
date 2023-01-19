@@ -48,21 +48,16 @@ public class PlaywrightManager {
     }
 
     private Supplier<Browser> getBrowser(Playwright playwright, String browserName) {
-        switch (browserName) {
-            case "chromium":
-                return () -> playwright.chromium().launch(getCommonLaunchOptions());
-            case "webkit":
-                return () -> playwright.webkit().launch(getCommonLaunchOptions());
-            case "firefox":
-                return () -> playwright.firefox().launch(getCommonLaunchOptions());
-            default:
-                throw new IllegalArgumentException(browserName);
-        }
+        return switch (browserName) {
+            case "chromium" -> () -> playwright.chromium().launch(getCommonLaunchOptions());
+            case "webkit" -> () -> playwright.webkit().launch(getCommonLaunchOptions());
+            case "firefox" -> () -> playwright.firefox().launch(getCommonLaunchOptions());
+            default -> throw new IllegalArgumentException(browserName);
+        };
     }
 
     private BrowserType.LaunchOptions getCommonLaunchOptions(){
         boolean isHeadless = Boolean.parseBoolean(System.getProperty("headless", "false"));
-        System.out.println("SET headless mode to " + isHeadless);
         return new BrowserType.LaunchOptions()
                 .setHeadless(isHeadless);
     }

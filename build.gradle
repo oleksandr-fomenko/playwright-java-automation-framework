@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.microsoft.playwright:playwright:1.28.1'
+    implementation 'org.testng:testng:7.7.0'
+    implementation 'org.aspectj:aspectjrt:1.9.19'
+    implementation 'org.aspectj:aspectjweaver:1.9.19'
+    implementation 'com.google.inject:guice:5.1.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    testCompileOnly 'org.projectlombok:lombok:1.18.24'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+}
+
+group = 'com.github'
+version = '1.0-SNAPSHOT'
+description = 'playwright-java-automation-framework'
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+
+
+tasks.named('test') {
+    doFirst {
+        def weaver = configurations.testRuntimeClasspath.find { it.name.contains('aspectjweaver') }
+        jvmArgs += "-javaagent:$weaver"
+        println 'Aspectj weaver configured'
+    }
+    useTestNG()
+}

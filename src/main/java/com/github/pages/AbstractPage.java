@@ -1,5 +1,6 @@
 package com.github.pages;
 
+import com.github.annotations.Loggable;
 import com.github.factories.PageManager;
 import com.microsoft.playwright.Page;
 
@@ -16,6 +17,7 @@ public abstract class AbstractPage {
         return PageManager.getPage(clazz);
     }
 
+    @Loggable(message = "Open home url...")
     public AbstractPage open(){
         page.navigate(url());
         return this;
